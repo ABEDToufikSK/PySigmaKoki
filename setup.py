@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='SIGMA KOKI',
-    version='1.0.0',
-    description='Control Sigma Koki Motorized Stages',
+    name='PySigmaKoki',
+    version='0.0.1',
+    description='Control Sigma Koki Motorized Stages SHOT/Hit/FC',
     url='https://github.com/',
     author='ABED TOUFIK',
     author_email='t.abed@sigma-koki.com',
