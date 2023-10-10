@@ -1,6 +1,6 @@
 # SIGMAKOKI Controller Python Library
 
-Welcome to the SIGMAKOKI Controller Python Library, designed to empower developers with a powerful Python interface for controlling SIGMAKOKI stages and controllers using pySerial. This library has been meticulously crafted to cater to a wide range of applications, including measurement systems, robotics, and beyond. With support for control modes (SHOT, HIT, FC), diverse stage types (linear, rotation, gonio), precision division settings, and units (nanometer, micrometer, millimeter, degree), along with comprehensive status monitoring and stage stroke management, you'll find everything you need to take control of your SIGMAKOKI equipment.
+Welcome to the SIGMAKOKI Controller Python Library, designed to empower developers with a powerful Python interface for controlling SIGMAKOKI stages and controllers using pySerial. This library has been meticulously crafted to cater to a wide range of applications, including measurement systems, robotics, and beyond. With support for control modes (SHOT, HIT & FC), diverse stage types (linear, rotation, gonio), precision division settings, and units (nanometer, micrometer, millimeter, degree), along with comprehensive status monitoring and stage stroke management, you'll find everything you need to take control of your SIGMAKOKI equipment.
 
 ## Features
 
