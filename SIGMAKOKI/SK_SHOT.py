@@ -6,34 +6,38 @@ from .clsStageAxisSHOT import clsStageAxisSHOT
 
 # SHOT class
 class StageControlShot(StageControlBase):
+    
 #region Constructor Region
-    def __init__(self,port,controller, bRate=9600):
+    def __init__(self,portNumber=1, controller= "SHOT-702 / SHOT-302GS", bRate=9600):
         """
         Initialize a new instance of the StageController class.
 
         Args:
             ports (SerialPort): The SerialPort object for communication.
         """
-        self.OpenSerialPort(port, controller, bRate)
+        if self.OpenSerialPort(portNumber, controller, bRate):
         
-        self.__controller_model = controller
+            self.__controller_model = controller
 
-        if self.__controller_model == "GIP-101":
-            self.__axis_count = 1
-        elif self.__controller_model == "SHOT-702 / SHOT-302GS":
-            self.__axis_count = 2
-        elif self.__controller_model == "SHOT-304GS":
-            self.__axis_count = 4
+            if self.__controller_model == "GIP-101":
+                self.__axis_count = 1
+            elif self.__controller_model == "SHOT-702 / SHOT-302GS":
+                self.__axis_count = 2
+            elif self.__controller_model == "SHOT-304GS":
+                self.__axis_count = 4
+            else:
+                self.__axis_count = self.AXIS_COUNT_DEFAULT
+
+            self.__axis = [clsStageAxisSHOT() for _ in range(self.__axis_count)]
+            self.comports.timeout = self.READ_TIMEOUT_DEFAULT
+            self.comports.write_timeout = self.WRITE_TIMEOUT_DEFAULT
+            self.__portNo = portNumber
+            self.__busy_flag = self.BUSY_FLAG_DEFAULT
+            self.__send_command = self.SEND_COMMAND_DEFAULT
+            self.__receive_command = self.RECIEVE_COMMAND_DEFAULT
+            self.__last_error_message = ""      
         else:
-            self.__axis_count = self.AXIS_COUNT_DEFAULT
-
-        self.__axis = [clsStageAxisSHOT() for _ in range(self.__axis_count)]
-
-        self.__portNo = port
-        self.__busy_flag = self.BUSY_FLAG_DEFAULT
-        self.__send_command = self.SEND_COMMAND_DEFAULT
-        self.__receive_command = self.RECIEVE_COMMAND_DEFAULT
-        self.__last_error_message = ""         
+            self.__last_error_message =+ ", please serial comport "   
 #endregion  
 
 #region data
@@ -75,8 +79,8 @@ class StageControlShot(StageControlBase):
     # Serial Port Settings
     PORT_NAME_DEFAULT = "COM1"
     BAUDRATE_DEFAULT = BaudRateclass.BR_9600
-    WRITE_TIMEOUT_DEFAULT = 500
-    READ_TIMEOUT_DEFAULT = 500
+    WRITE_TIMEOUT_DEFAULT = 10
+    READ_TIMEOUT_DEFAULT = 10
     DATABITS_DEFAULT = 8
     PARITY_DEFAULT = serial.PARITY_NONE
     STOPBITS_DEFAULT = serial.STOPBITS_ONE
@@ -87,17 +91,17 @@ class StageControlShot(StageControlBase):
 
 
     # Member Variables
-    __axis = []  # A list to store clsStageAxisSHOT objects
-    __axis.append(clsStageAxisSHOT())
+    # __axis = []  # A list to store clsStageAxisSHOT objects
+    # __axis.append(clsStageAxisSHOT())
     #comports = None  # SerialPort object
-    comports = serial.Serial
-    __portNo = "com1"
-    __controller_model = ""  # Controller model information
-    __axis_count = 0  # Number of axes
-    __busy_flag = False  # Flag to indicate if the controller is busy
-    __send_command = ""  # Command to send
-    __receive_command = ""  # Command to receive    
-    __last_error_message = ""  # Last error message
+    # comports = serial.Serial
+    # __portNo = "com1"
+    #__controller_model = ""  # Controller model information
+    # __axis_count = 0  # Number of axes
+    # __busy_flag = False  # Flag to indicate if the controller is busy
+    # __send_command = ""  # Command to send
+    # __receive_command = ""  # Command to receive    
+    # __last_error_message = ""  # Last error message
 
 #endregion
 
@@ -710,6 +714,12 @@ class StageControlShot(StageControlBase):
 
     # Get status for 1/2/4 axes
     def UpdateStatus(self):
+        """
+        Updates the status of the controller for 1, 2, or 4 axes.
+
+        Returns:
+            bool: True if the status update was successful, False otherwise.
+        """
         ret = False
 
         if self.__axis_count == 1:
@@ -745,7 +755,7 @@ class StageControlShot(StageControlBase):
             reccom = self.comports.readline()
 
             # Coordinate value
-            self.__axis[0].PositionPulse = int(reccom.decode('utf-8')[1:10])
+            self.__axis[0].PositionPulse = int(reccom.decode('utf-8')[1:10].replace(' ',''))
 
             if reccom[0] == "-":
                 self.__axis[0].PositionPulse *= -1
@@ -765,15 +775,15 @@ class StageControlShot(StageControlBase):
                         self.__axis[i].limit_state = clsStageAxisSHOT.AxisLimitState.LimitState_Soft
 
             # BUSY flag
-            if reccom[15] == "B":
+            if reccom.decode('utf-8')[15] == "B":
                 self.__busy_flag = True
-            elif reccom[15] == "R":
+            elif reccom.decode('utf-8')[15] == "R":
                 self.__busy_flag = False
 
             return True
 
         except Exception as ex:
-            self.last_errormessage = ex.message
+            self.__last_error_message = str(ex)
             return False
 
     # Status retrieval for 2 axes
@@ -802,7 +812,7 @@ class StageControlShot(StageControlBase):
             # Coordinate values
             for i in range(self.__axis_count):
                 split = reccom.decode('utf-8').split(',')
-                self.__axis[i].PositionPulse = int(split[i])
+                self.__axis[i].PositionPulse = int(split[i].replace(' ',''))
 
             # Hard limit detection
             if reccom.decode('utf-8')[24] == "K":
@@ -827,15 +837,15 @@ class StageControlShot(StageControlBase):
                         self.__axis[i].limit_state = clsStageAxisSHOT.AxisLimitState.LimitState_Soft
 
             # BUSY flag
-            if reccom[26] == "B":
+            if  reccom.decode('utf-8')[26] == "B":
                 self.__busy_flag = True
-            elif reccom[26] == "R":
+            elif  reccom.decode('utf-8')[26] == "R":
                 self.__busy_flag = False
 
             return True
 
         except Exception as ex:
-            self.last_errormessage = ex.message
+            self.__last_error_message = str(ex)
             return False
 
     # Status retrieval for 4 axes
@@ -869,7 +879,7 @@ class StageControlShot(StageControlBase):
                     # Retry process
                     cnt += 1
                     if cnt >= 5:
-                        self.last_errormessage = "Status retrieval error"
+                        self.__last_error_message = "Status retrieval error"
                         return False
 
                     if self.comports.isOpen():
@@ -907,7 +917,7 @@ class StageControlShot(StageControlBase):
             return True
 
         except Exception as ex:
-            self.last_errormessage = ex.message
+            self.__last_error_message = str(ex)
             return False
 
     # Check for hard limit detection
@@ -1019,7 +1029,7 @@ class StageControlShot(StageControlBase):
             return True
 
         except Exception as ex:
-            self.last_errormessage = str(ex)
+            self.__last_error_message = str(ex)
             return False
 
     # Mechanical origin return (single axis)
@@ -1051,7 +1061,7 @@ class StageControlShot(StageControlBase):
                 self.__last_error_message = "no reading data"
 
         except Exception as ex:
-            self.last_errormessage = str(ex)
+            self.__last_error_message = str(ex)
             return False
 
         return False
@@ -1087,7 +1097,7 @@ class StageControlShot(StageControlBase):
                 self.__last_error_message = "no reading data"
 
         except Exception as ex:
-            self.last_errormessage = str(ex)
+            self.__last_error_message = str(ex)
             return False
 
         return False
@@ -1134,7 +1144,7 @@ class StageControlShot(StageControlBase):
                 self.__last_error_message = "no reading data"
 
         except Exception as ex:
-            self.last_errormessage = str(ex)
+            self.__last_error_message = str(ex)
             return False
 
         return False
@@ -1173,7 +1183,7 @@ class StageControlShot(StageControlBase):
                 self.__last_error_message = "no reading data"
 
         except Exception as ex:
-            self.last_errormessage = str(ex)
+            self.__last_error_message = str(ex)
             return False
 
         return False
@@ -1206,7 +1216,7 @@ class StageControlShot(StageControlBase):
                 self.__last_error_message = "no reading data"
 
         except Exception as ex:
-            self.last_errormessage = str(ex)
+            self.__last_error_message = str(ex)
             return False
 
         return False
@@ -1239,7 +1249,7 @@ class StageControlShot(StageControlBase):
                 self.__last_error_message = "no reading data"
 
         except Exception as ex:
-            self.last_errormessage = str(ex)
+            self.__last_error_message = str(ex)
             return False
 
         return False
@@ -1272,7 +1282,7 @@ class StageControlShot(StageControlBase):
                 self.__last_error_message = "no reading data"
 
         except Exception as ex:
-            self.last_errormessage = str(ex)
+            self.__last_error_message = str(ex)
             return False
 
         return False
@@ -1323,7 +1333,7 @@ class StageControlShot(StageControlBase):
                     return True
 
         except Exception as ex:
-            self.last_errormessage = str(ex)
+            self.__last_error_message = str(ex)
             return False
 
         return False
@@ -1384,7 +1394,7 @@ class StageControlShot(StageControlBase):
                     return True
 
         except Exception as ex:
-            self.last_errormessage = str(ex)
+            self.__last_error_message = str(ex)
             return False
 
         return False
@@ -1490,16 +1500,16 @@ class StageControlShot(StageControlBase):
     def CheckSpeedParameters(self, fast, slow, act):
         
         if slow < 1 or slow > 500000:
-            self.last_errormessage = "Invalid slow speed setting."
+            self.__last_error_message = "Invalid slow speed setting."
             return False
         if fast < 1 or fast > 500000:
-            self.last_errormessage = "Invalid fast speed setting."
+            self.__last_error_message = "Invalid fast speed setting."
             return False
         if slow > fast:
-            self.last_errormessage = "Slow speed should be less than fast speed."
+            self.__last_error_message = "Slow speed should be less than fast speed."
             return False
         if act < 0 or act > 1000:
-            self.last_errormessage = "Invalid acceleration/deceleration time setting."
+            self.__last_error_message = "Invalid acceleration/deceleration time setting."
             return False
         return True
 
@@ -1539,7 +1549,7 @@ class StageControlShot(StageControlBase):
                 self.__last_error_message = "no reading data"
 
         except Exception as ex:
-            self.last_errormessage = str(ex)
+            self.__last_error_message = str(ex)
             return False
 
         return False
@@ -1609,7 +1619,7 @@ class StageControlShot(StageControlBase):
                 self.__last_error_message = "no reading data"
 
         except Exception as ex:
-            self.last_errormessage = str(ex)
+            self.__last_error_message = str(ex)
             return False
 
         return False
@@ -1675,7 +1685,7 @@ class StageControlShot(StageControlBase):
 
 
         except Exception as ex:
-            self.last_errormessage = ex.message
+            self.__last_error_message = str(ex)
             return False
         
         return False
@@ -1693,6 +1703,9 @@ class StageControlShot(StageControlBase):
         return self.LinearInterpolationPulse(move_x / self.__axis[0].PulseToMillimeter, move_y / self.__axis[1].PulseToMillimeter)
     #　Set resolution
     def SetResolution(self, axisnum, value):
+        '''
+        Set resolution
+        '''
         try:
             self.comports.flushOutput()
             self.comports.reset_input_buffer()
@@ -1715,7 +1728,7 @@ class StageControlShot(StageControlBase):
                 self.__last_error_message = "no reading data"
 
         except Exception as ex:
-            self.last_errormessage = ex.message
+            self.__last_error_message = str(ex)
             return False
         
         return False
@@ -1742,7 +1755,7 @@ class StageControlShot(StageControlBase):
             return True
 
         except Exception as ex:
-            self.last_errormessage = ex.message
+            self.__last_error_message = str(ex)
             return False      
     
     # Open the COM port
@@ -1765,7 +1778,7 @@ class StageControlShot(StageControlBase):
             return True
 
         except Exception as ex:
-            self.last_errormessage = ex.message
+            self.__last_error_message = str(ex)
             return False
 
     # Close the COM port
@@ -1778,20 +1791,19 @@ class StageControlShot(StageControlBase):
                 self.__last_error_message= "comport is already closed"
                 return False           
         except Exception as ex:
-            self.last_errormessage = ex.message
+            self.__last_error_message = str(ex)
             return False
 
     # Connect to the COM port and update status simultaneously
-    def ConnectCom(self):
-        if self.comports.isopen():
+    def IsComConnected(self):
+        if not self.comports.is_open:
             return False
 
         # Check and connect while also requesting the status
-        if self.OpenSerialPort():
-            if self.UpdateStatus():
-                return True
-            else:
-                self.CloseSerialPort()
+        if self.UpdateStatus():
+            return True
+        else:
+            self.CloseSerialPort()
 
         return False
 

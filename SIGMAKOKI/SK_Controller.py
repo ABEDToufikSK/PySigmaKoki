@@ -272,7 +272,7 @@ class StageControlBase:
 
 #region Define other methods, properties, and fields as needed
 
-    def ConnectCom(self):
+    def IsComConnected(self):
         pass
 
     def OpenSerialPort(self):
