@@ -41,7 +41,6 @@ if __name__ == "__main__":
 
     # Create an instance of StageControlShot with the specified parameters 
     # JP:指定されたパラメータでStageControlShotのインスタンスを作成
-    #con = StageControlShot(port, "SHOT-304GS", StageControlShot.BaudRateclass.BR_9600)
     con = StageControlShot(port, "SHOT-702 / SHOT-302GS", StageControlShot.BaudRateclass.BR_9600)
     
     if con.IsComConnected():
@@ -57,8 +56,6 @@ if __name__ == "__main__":
     con.SetResolution(2, 2)
 
     # Set speed and acceleration for all stages  JP: すべてのステージの速度と加速度を設定
-    # value = [5, 5, 5, 4]
-    # acc = [50, 50, 50, 50]
     value = [5, 5]
     acc = [50, 50]
     con.SetSpeedAllMillimeter(value, acc)
@@ -75,9 +72,6 @@ if __name__ == "__main__":
         if con.UpdateStatus():
             getAllPosition()
 
-    
-
-    #speed = [0, 0, 0, 0]
     speed = [0, 0]
     for i in range(2):
         speed[i] = con.GetSpeedMillimeter(i+1)  # Get speed for each axis JP: # 各軸の速度を取得
