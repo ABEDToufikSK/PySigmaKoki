@@ -80,187 +80,416 @@ class clsStageAxisSHOT:
 
     #region Properties
 
+    # Fullstep Move Value in Micrometers
     @property
     def FullstepMoveValueMicrometer(self):
+        """
+        Gets the full step move value in micrometers.
+
+        Returns:
+        float: The full step move value in micrometers.
+        """
         return self.fullstep_um
 
     @FullstepMoveValueMicrometer.setter
     def FullstepMoveValueMicrometer(self, value):
+        """
+        Sets the full step move value in micrometers.
+
+        Args:
+        value (float): The full step move value to set in micrometers.
+
+        Returns:
+        None
+        """
         self.fullstep_um = value
 
+    # Fullstep Move Value in Degrees
     @property
     def FullstepMoveValueDegree(self):
+        """
+        Gets the full step move value in degrees.
+
+        Returns:
+        float: The full step move value in degrees.
+        """
         return self.fullstep_deg
 
     @FullstepMoveValueDegree.setter
     def FullstepMoveValueDegree(self, value):
+        """
+        Sets the full step move value in degrees.
+
+        Args:
+        value (float): The full step move value to set in degrees.
+
+        Returns:
+        None
+        """
         self.fullstep_deg = value
 
+    # Division Number
     @property
     def DivisionNumber(self):
+        """
+        Gets the division number.
+
+        Returns:
+        int: The division number.
+        """
         return self.division_number
 
     @DivisionNumber.setter
     def DivisionNumber(self, value):
+        """
+        Sets the division number and updates other parameters accordingly.
+
+        Args:
+        value (int): The division number to set.
+
+        Returns:
+        None
+        """
         self.SetDefaultparameterByDiv(value)
         self.division_number = value
 
+    # Position in Pulses
     @property
     def PositionPulse(self):
         """
         Gets or sets the position in pulses.
+
+        Returns:
+        int: The position in pulses.
         """
         return self.position_pulse
 
     @PositionPulse.setter
     def PositionPulse(self, value):
+        """
+        Sets the position in pulses.
+
+        Args:
+        value (int): The position in pulses to set.
+
+        Returns:
+        None
+        """
         self.position_pulse = value
 
+    # Position in Nanometers
     @property
     def PositionNanometer(self):
         """
         Gets or sets the position in nanometers.
+
+        Returns:
+        float: The position in nanometers.
         """
         return self.position_pulse * self.pulse_to_nm
 
     @PositionNanometer.setter
     def PositionNanometer(self, value):
+        """
+        Sets the position in nanometers.
+
+        Args:
+        value (float): The position in nanometers to set.
+
+        Returns:
+        None
+        """
         self.position_pulse = value / self.pulse_to_nm
 
+    # Position in Micrometers
     @property
     def PositionMicrometer(self):
         """
         Gets or sets the position in micrometers.
+
+        Returns:
+        float: The position in micrometers.
         """
         return float(self.PositionNanometer / 1000)
 
     @PositionMicrometer.setter
     def PositionMicrometer(self, value):
+        """
+        Sets the position in micrometers.
+
+        Args:
+        value (float): The position in micrometers to set.
+
+        Returns:
+        None
+        """
         self.PositionNanometer = int(value * 1000)
 
+    # Position in Millimeters
     @property
     def PositionMillimeter(self):
         """
         Gets or sets the position in millimeters.
+
+        Returns:
+        float: The position in millimeters.
         """
         return float(self.PositionNanometer / 1000000)
 
     @PositionMillimeter.setter
     def PositionMillimeter(self, value):
+        """
+        Sets the position in millimeters.
+
+        Args:
+        value (float): The position in millimeters to set.
+
+        Returns:
+        None
+        """
         self.PositionNanometer = int(value * 1000000)
 
+    # Position in Degrees
     @property
     def PositionDegree(self):
         """
         Gets or sets the position in degrees.
+
+        Returns:
+        float: The position in degrees.
         """
         return float(self.position_pulse * self.pulse_to_deg)
 
     @PositionDegree.setter
     def PositionDegree(self, value):
+        """
+        Sets the position in degrees.
+
+        Args:
+        value (float): The position in degrees to set.
+
+        Returns:
+        None
+        """
         self.position_pulse = float(value / self.pulse_to_deg)
 
+    # Pulse to Nanometer Conversion Factor
     @property
     def PulseToNanometer(self):
         """
         Gets or sets the conversion factor from pulses to nanometers.
+
+        Returns:
+        float: The pulse to nanometer conversion factor.
         """
         return self.pulse_to_nm
 
     @PulseToNanometer.setter
     def PulseToNanometer(self, value):
+        """
+        Sets the pulse to nanometer conversion factor.
+
+        Args:
+        value (float): The pulse to nanometer conversion factor to set.
+
+        Returns:
+        None
+        """
         self.pulse_to_nm = value
 
+    # Pulse to Micrometer Conversion Factor
     @property
     def PulseToMicrometer(self):
         """
         Gets or sets the conversion factor from pulses to micrometers.
+
+        Returns:
+        float: The pulse to micrometer conversion factor.
         """
         return float(self.pulse_to_nm / 1000)
 
     @PulseToMicrometer.setter
     def PulseToMicrometer(self, value):
+        """
+        Sets the pulse to micrometer conversion factor.
+
+        Args:
+        value (float): The pulse to micrometer conversion factor to set.
+
+        Returns:
+        None
+        """
         self.pulse_to_nm = int(value * 1000)
 
     # Property for Pulse to millimeter conversion value
     @property
     def PulseToMillimeter(self):
-        """ 
-        Property for Pulse to millimeter conversion value
+        """
+        Sets the pulse to millimeter conversion factor.
+
+        Args:
+        value (float): The pulse to millimeter conversion factor to set.
+
+        Returns:
+        None
         """
         return float(self.pulse_to_nm / 1000000)
 
     @PulseToMillimeter.setter
     def PulseToMillimeter(self, value):
+        """
+        Gets or sets the conversion factor from pulses to degrees.
+
+        Returns:
+        float: The pulse to degree conversion factor.
+        """
         self.pulse_to_mm = float(value * 1000000)
 
-    
+    # Pulse to Degree Conversion Value
     @property
     def PulseToDegree(self):
         """
-        Property for Pulse to degree conversion value
+        Gets or sets the conversion factor from pulses to degrees.
+
+        Returns:
+        float: The pulse to degree conversion factor.
         """
         return self.pulse_to_degree
 
     @PulseToDegree.setter
     def PulseToDegree(self, value):
+        """
+        Sets the pulse to degree conversion factor.
+
+        Args:
+        value (float): The pulse to degree conversion factor to set.
+
+        Returns:
+        None
+        """
         self.pulse_to_degree = float(value)
 
+    # Limit State
     @property
     def LimitState(self) -> AxisLimitState:
         """
-        Property for Limit state
+        Gets or sets the limit state.
+
+        Returns:
+        AxisLimitState: The limit state.
         """
         return self.limit_state
 
     @LimitState.setter
     def LimitState(self, axisLimitState : AxisLimitState):
+        """
+        Sets the limit state.
+
+        Args:
+        axisLimitState (AxisLimitState): The limit state to set.
+
+        Returns:
+        None
+        """
         self.limit_state = axisLimitState
 
+    # Speed in Pulse per Second
     @property
     def SpeedFastPulse(self):
         """
-        Property for Speed (F: pulse/sec)
+        Gets or sets the fast speed in pulses per second (F: pulse/sec).
+
+        Returns:
+        float: The fast speed in pulses per second.
         """
         return self.speed_fast
 
     @SpeedFastPulse.setter
     def SpeedFastPulse(self, value):
+        """
+        Sets the fast speed in pulses per second.
+
+        Args:
+        value (float): The fast speed in pulses per second to set.
+
+        Returns:
+        None
+        """
         self.speed_fast = value
 
+    # Speed in Nanometers per Second
     @property
     def SpeedFastNanometer(self):
         """
-        Property for Speed (F: nm/sec)
+        Gets or sets the fast speed in nanometers per second (F: nm/sec).
+
+        Returns:
+        float: The fast speed in nanometers per second.
         """
         return self.speed_fast* self.pulse_to_nm
 
     @SpeedFastNanometer.setter
     def SpeedFastNanometer(self, value):
+        """
+        Sets the fast speed in nanometers per second.
+
+        Args:
+        value (float): The fast speed in nanometers per second to set.
+
+        Returns:
+        None
+        """
         self.speed_fast = int(value / self.pulse_to_nm)
 
+    # Speed in Micrometers per Second
     @property
     def SpeedFastMicrometer(self):
         """
         Gets or sets the fast speed in micrometers per second (F: um/sec).
+
+        Returns:
+        float: The fast speed in micrometers per second.
         """
         return float(self.SpeedFastNanometer / 1000)
 
     @SpeedFastMicrometer.setter
     def SpeedFastMicrometer(self, value):
+        """
+        Sets the fast speed in micrometers per second.
+
+        Args:
+        value (float): The fast speed in micrometers per second to set.
+
+        Returns:
+        None
+        """
         self.SpeedFastNanometer = int(value * 1000)
 
+    # Speed in Millimeters per Second
     @property
     def SpeedFastMillimeter(self):
         """
         Gets or sets the fast speed in millimeters per second (F: mm/sec).
+
+        Returns:
+        float: The fast speed in millimeters per second.
         """
         return float(self.SpeedFastNanometer / 1000000)
 
     @SpeedFastMillimeter.setter
     def SpeedFastMillimeter(self, value):
+        """
+        Sets the fast speed in millimeters per second.
+
+        Args:
+        value (float): The fast speed in millimeters per second to set.
+
+        Returns:
+        None
+        """
         self.SpeedFastNanometer = int(value * 1000000)
 
+    # Speed in Degrees per Second
     @property
     def SpeedFastDegree(self):
         """
@@ -270,8 +499,15 @@ class clsStageAxisSHOT:
 
     @SpeedFastDegree.setter
     def SpeedFastDegree(self, value):
+        """
+        Sets the fast speed in degrees per second.
+
+        Args:
+        value (float): The fast speed in degrees per second to set.
+        """
         self.speed_fast = int(value / self.pulse_to_deg)
 
+    # Speed Slow in Pulse per Second (S: pulse/sec)
     @property
     def SpeedSlowPulse(self):
         """
@@ -281,8 +517,15 @@ class clsStageAxisSHOT:
 
     @SpeedSlowPulse.setter
     def SpeedSlowPulse(self, value):
+        """
+        Sets the slow speed in pulses per second.
+
+        Args:
+        value (float): The slow speed in pulses per second to set.
+        """
         self.speed_slow = value
 
+    # Acceleration/Deceleration Time in Milliseconds (R: msec)
     @property
     def SpeedActMillisecond(self):
         """
@@ -292,8 +535,15 @@ class clsStageAxisSHOT:
 
     @SpeedActMillisecond.setter
     def SpeedActMillisecond(self, value):
+        """
+        Sets the acceleration/deceleration time in milliseconds.
+
+        Args:
+        value (int): The acceleration/deceleration time in milliseconds to set.
+        """
         self.speed_act = value
 
+    # Maximum Stroke (Upper Limit) in Pulses
     @property
     def MaxStrokePulse(self):
         """
@@ -303,8 +553,15 @@ class clsStageAxisSHOT:
 
     @MaxStrokePulse.setter
     def MaxStrokePulse(self, value):
+        """
+        Sets the maximum stroke in pulses (upper limit).
+
+        Args:
+        value (int): The maximum stroke in pulses to set.
+        """
         self.stroke_limit_max = value
 
+    # Maximum Stroke (Upper Limit) in Nanometers
     @property
     def MaxStrokeNanometer(self):
         """
@@ -314,8 +571,15 @@ class clsStageAxisSHOT:
 
     @MaxStrokeNanometer.setter
     def MaxStrokeNanometer(self, value):
+        """
+        Sets the maximum stroke in nanometers (upper limit).
+
+        Args:
+        value (int): The maximum stroke in nanometers to set.
+        """
         self.stroke_limit_max = value / self.pulse_to_nm
 
+    # Maximum Stroke (Upper Limit) in Micrometers
     @property
     def MaxStrokeMicrometer(self):
         """
@@ -325,8 +589,15 @@ class clsStageAxisSHOT:
 
     @MaxStrokeMicrometer.setter
     def MaxStrokeMicrometer(self, value):
+        """
+        Sets the maximum stroke in micrometers (upper limit).
+
+        Args:
+        value (float): The maximum stroke in micrometers to set.
+        """
         self.MaxStrokeNanometer = int(value * 1000)
 
+    # Maximum Stroke (Upper Limit) in Millimeters
     @property
     def MaxStrokeMillimeter(self):
         """
@@ -336,8 +607,15 @@ class clsStageAxisSHOT:
 
     @MaxStrokeMillimeter.setter
     def MaxStrokeMillimeter(self, value):
+        """
+        Sets the maximum stroke in millimeters (upper limit).
+
+        Args:
+        value (float): The maximum stroke in millimeters to set.
+        """
         self.MaxStrokeNanometer = int(value * 1000000)
 
+    # Maximum Stroke (Upper Limit) in Degrees
     @property
     def MaxStrokeDegree(self):
         """
@@ -347,8 +625,15 @@ class clsStageAxisSHOT:
 
     @MaxStrokeDegree.setter
     def MaxStrokeDegree(self, value):
+        """
+        Sets the maximum stroke in degrees (upper limit).
+
+        Args:
+        value (float): The maximum stroke in degrees to set.
+        """
         self.stroke_limit_max = int(value / self.pulse_to_deg)
 
+    # Minimum Stroke (Lower Limit) in Pulses
     @property
     def MinStrokePulse(self):
         """
@@ -358,8 +643,15 @@ class clsStageAxisSHOT:
 
     @MinStrokePulse.setter
     def MinStrokePulse(self, value):
+        """
+        Sets the minimum stroke in pulses (lower limit).
+
+        Args:
+        value (int): The minimum stroke in pulses to set.
+        """
         self.stroke_limit_min = value
 
+    # Minimum Stroke (Lower Limit) in Nanometers
     @property
     def MinStrokeNanometer(self):
         """
@@ -369,8 +661,15 @@ class clsStageAxisSHOT:
 
     @MinStrokeNanometer.setter
     def MinStrokeNanometer(self, value):
+        """
+        Sets the minimum stroke in nanometers (lower limit).
+
+        Args:
+        value (int): The minimum stroke in nanometers to set.
+        """
         self.stroke_limit_min = value / self.pulse_to_nm
 
+    # Minimum Stroke (Lower Limit) in Micrometers
     @property
     def MinStrokeMicrometer(self):
         """
@@ -380,8 +679,15 @@ class clsStageAxisSHOT:
 
     @MinStrokeMicrometer.setter
     def MinStrokeMicrometer(self, value):
+        """
+        Sets the minimum stroke in micrometers (lower limit).
+
+        Args:
+        value (float): The minimum stroke in micrometers to set.
+        """
         self.MinStrokeNanometer = int(value * 1000)
 
+    # Minimum Stroke (Lower Limit) in Millimeters
     @property
     def MinStrokeMillimeter(self):
         """
@@ -391,8 +697,15 @@ class clsStageAxisSHOT:
 
     @MinStrokeMillimeter.setter
     def MinStrokeMillimeter(self, value):
+        """
+        Sets the minimum stroke in millimeters (lower limit).
+
+        Args:
+        value (float): The minimum stroke in millimeters to set.
+        """
         self.MinStrokeNanometer = int(value * 1000000)
 
+    # Minimum Stroke (Lower Limit) in Degrees
     @property
     def MinStrokeDegree(self):
         """
@@ -402,8 +715,15 @@ class clsStageAxisSHOT:
 
     @MinStrokeDegree.setter
     def MinStrokeDegree(self, value):
+        """
+        Sets the minimum stroke in degrees (lower limit).
+
+        Args:
+        value (float): The minimum stroke in degrees to set.
+        """
         self.stroke_limit_min = int(value / self.pulse_to_deg)
 
+    # Offset from Machine Origin in Pulses
     @property
     def OffsetMoriginPulse(self):
         """
@@ -413,8 +733,15 @@ class clsStageAxisSHOT:
 
     @OffsetMoriginPulse.setter
     def OffsetMoriginPulse(self, value):
+        """
+        Sets the machine origin offset in pulses.
+
+        Args:
+        value (int): The machine origin offset in pulses to set.
+        """
         self.offset_morigin = value
 
+    # Offset from Machine Origin in Nanometers
     @property
     def OffsetMoriginNanometer(self):
         """
@@ -424,8 +751,15 @@ class clsStageAxisSHOT:
 
     @OffsetMoriginNanometer.setter
     def OffsetMoriginNanometer(self, value):
+        """
+        Sets the machine origin offset in nanometers.
+
+        Args:
+        value (int): The machine origin offset in nanometers to set.
+        """
         self.offset_morigin = int(value / self.pulse_to_nm)
 
+    # Offset from Machine Origin in Micrometers
     @property
     def OffsetMoriginMicrometer(self):
         """
@@ -435,8 +769,15 @@ class clsStageAxisSHOT:
 
     @OffsetMoriginMicrometer.setter
     def OffsetMoriginMicrometer(self, value):
+        """
+        Sets the machine origin offset in micrometers.
+
+        Args:
+        value (float): The machine origin offset in micrometers to set.
+        """
         self.OffsetMoriginNanometer = int(value * 1000)
 
+    # Offset from Machine Origin in Millimeters
     @property
     def OffsetMoriginMillimeter(self):
         """
@@ -446,8 +787,15 @@ class clsStageAxisSHOT:
 
     @OffsetMoriginMillimeter.setter
     def OffsetMoriginMillimeter(self, value):
+        """
+        Sets the machine origin offset in millimeters.
+
+        Args:
+        value (float): The machine origin offset in millimeters to set.
+        """
         self.OffsetMoriginNanometer = int(value * 1000000)
 
+    # Offset from Machine Origin in Degrees
     @property
     def OffsetMoriginDegree(self):
         """
@@ -457,6 +805,12 @@ class clsStageAxisSHOT:
 
     @OffsetMoriginDegree.setter
     def OffsetMoriginDegree(self, value):
+        """
+        Sets the machine origin offset in degrees.
+
+        Args:
+        value (float): The machine origin offset in degrees to set.
+        """
         self.offset_morigin = int(value / self.pulse_to_deg)
 
     #endregion

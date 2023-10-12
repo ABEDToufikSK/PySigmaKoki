@@ -75,6 +75,8 @@ if __name__ == "__main__":
         if con.UpdateStatus():
             getAllPosition()
 
+    
+
     #speed = [0, 0, 0, 0]
     speed = [0, 0]
     for i in range(2):
