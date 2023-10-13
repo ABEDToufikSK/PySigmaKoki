@@ -92,7 +92,7 @@ if __name__ == "__main__":
     Controlleur.SetSpeedAllMillimeter(value, acc)
 ```
 
-You can find further continuation within the program by exploring [Shot-304GS](tests/test_SHOT-304GS.py)
+<span style="color: red;">**You can find further continuation within the program by exploring**</span> [Shot-304GS](tests/test_SHOT-304GS.py)
 
 <div style="page-break-before: always;"
 ></div>
@@ -138,7 +138,7 @@ if __name__ == "__main__":
     Controller.SetSpeedAllMillimeter(value, acc)
 ```
 
-You can find further continuation within the program by exploring [Shot-302GS](tests/test_SHOT-302GS_SHOT-702.py)
+<span style="color: red;">**You can find further continuation within the program by exploring**</span> [Shot-302GS](tests/test_SHOT-302GS_SHOT-702.py)
 
 ## SIGMAKOKI | Precision in Motion
 
