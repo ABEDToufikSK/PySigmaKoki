@@ -64,7 +64,7 @@ import time
 # add the parent directory of the current file to the Python module
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Import the required module    JP:  
+# Import the required module    JP:  必要なモジュール・インポート  
 from SIGMAKOKI.SK_SHOT import StageControlShot
 
 if __name__ == "__main__":
@@ -72,19 +72,24 @@ if __name__ == "__main__":
 
     # Create an instance of StageControlShot with the specified parameters 
     # JP:指定されたパラメータでStageControlShotのインスタンスを作成
-    con = StageControlShot(port, "SHOT-304GS", StageControlShot.BaudRateclass.BR_9600)
+    Controlleur = StageControlShot(port, "SHOT-304GS", StageControlShot.BaudRateClass.BR_9600)
     
-    if con.IsComConnected():
+    if Controlleur.IsComConnected():
         print("Serial Comport is Connected")
     else:
-        print(con.LastErrorMessage+ " [Serial Comport is Not Open]")
+        print(Controlleur.LastErrorMessage+ " [Serial Comport is Not Open]")
         sys.exit()
 
     # set full step for axis 1 & 2   JP: 軸1および軸2の線形補間
-    con.SetFullStepInMicrometer(1, 2)
-    con.SetFullStepInMicrometer(2, 2)
-    con.SetResolution(1, 2)
-    con.SetResolution(2, 2)
+    Controlleur.SetFullStepInMicrometer(1, 2)
+    Controlleur.SetFullStepInMicrometer(2, 2)
+    Controlleur.SetResolution(1, 2)
+    Controlleur.SetResolution(2, 2)
+
+    # Set speed and acceleration for all stages  JP: すべてのステージの速度と加速度を設定
+    value = [5, 5, 5, 4]
+    acc = [50, 50, 50, 50]
+    Controlleur.SetSpeedAllMillimeter(value, acc)
 ```
 
 You can find further continuation within the program by exploring [Shot-304GS](tests/test_SHOT-304GS.py)
@@ -105,7 +110,7 @@ import time
 # add the parent directory of the current file to the Python module
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Import the required module    JP:  
+# Import the required module    JP:  必要なモジュール・インポート
 from SIGMAKOKI.SK_SHOT import StageControlShot
 
 if __name__ == "__main__":
@@ -113,24 +118,24 @@ if __name__ == "__main__":
 
     # Create an instance of StageControlShot with the specified parameters 
     # JP:指定されたパラメータでStageControlShotのインスタンスを作成
-    con = StageControlShot(port, "SHOT-702 / SHOT-302GS", StageControlShot.BaudRateClass.BR_9600) #please set to BaudRateClass.BR_38400 in case of SHOT-702 
+    Controller = StageControlShot(port, "SHOT-702 / SHOT-302GS", StageControlShot.BaudRateClass.BR_9600)#please set to BaudRateClass.BR_38400 in case of SHOT-702 
     
-    if con.IsComConnected():
+    if Controller.IsComConnected():
         print("Serial Comport is Connected")
     else:
-        print(con.LastErrorMessage+ " [Serial Comport is Not Open]")
+        print(Controller.LastErrorMessage+ " [Serial Comport is Not Open]")
         sys.exit()
 
     # set full step for axis 1 & 2   JP: 軸1および軸2の線形補間
-    con.SetFullStepInMicrometer(1, 2)
-    con.SetFullStepInMicrometer(2, 2)
-    con.SetResolution(1, 2)
-    con.SetResolution(2, 2)
+    Controller.SetFullStepInMicrometer(1, 2)
+    Controller.SetFullStepInMicrometer(2, 2)
+    Controller.SetResolution(1, 2)
+    Controller.SetResolution(2, 2)
 
     # Set speed and acceleration for all stages  JP: すべてのステージの速度と加速度を設定
     value = [5, 5]
     acc = [50, 50]
-    con.SetSpeedAllMillimeter(value, acc)
+    Controller.SetSpeedAllMillimeter(value, acc)
 ```
 
 You can find further continuation within the program by exploring [Shot-302GS](tests/test_SHOT-302GS_SHOT-702.py)
