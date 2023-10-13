@@ -407,15 +407,14 @@ class StageControlBase:
     def RelativeDriveAllDegree(pitch):
         pass
 
-    # JOG drive functions for single  axes
+    # JOG drive functions for single and all axes
     def JOGDriveSingle(axisnum, plusflag):
         pass
 
-    # JOG drive functions for all axes
     def JOGDriveAll(plusflag):
         pass
 
-    # Set speed functions for single axes
+    # Set speed functions for single and all axes
     def SetSpeedSinglePulse(axisnum, value, act):
         pass
 

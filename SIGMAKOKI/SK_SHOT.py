@@ -42,7 +42,7 @@ class StageControlShot(StageControlBase):
 
 #region members & data
     #BaudRate class (Enumerations)
-    class BaudRateclass:
+    class BaudRateClass:
             BR_2400 = 2400
             BR_4800 = 4800
             BR_9600 = 9600
@@ -58,7 +58,7 @@ class StageControlShot(StageControlBase):
 
     # Serial Port Settings
     PORT_NAME_DEFAULT = "COM1"
-    BAUDRATE_DEFAULT = BaudRateclass.BR_9600
+    BAUDRATE_DEFAULT = BaudRateClass.BR_9600
     WRITE_TIMEOUT_DEFAULT = 10
     READ_TIMEOUT_DEFAULT = 10
     DATABITS_DEFAULT = 8
@@ -2902,14 +2902,14 @@ class StageControlShot(StageControlBase):
             return False      
     
     # Open the COM port
-    def OpenSerialPort(self, port, controller, bRate=BaudRateclass.BR_9600):
+    def OpenSerialPort(self, port, controller, bRate=BaudRateClass.BR_9600):
         """
         Opens the specified COM port with the given controller model and baud rate.
 
         Args:
             port (str): The COM port to open.
             controller (str): The model of the controller (e.g., "GIP-101", "SHOT-702 / SHOT-302GS").
-            bRate (int): The baud rate for communication (default is BaudRateclass.BR_9600).
+            bRate (int): The baud rate for communication (default is BaudRateClass.BR_9600).
 
         Returns:
             bool: True if the COM port was successfully opened, False otherwise.
@@ -2920,15 +2920,17 @@ class StageControlShot(StageControlBase):
 
             # Configure the serial port based on the controller model
             if self.__controller_model == "GIP-101":
-                ser = serial.Serial(port, baudrate=bRate, timeout=0, parity=serial.PARITY_NONE, bytesize=serial.EIGHTBITS)
-            elif self.__controller_model in ["SHOT-702", "SHOT-302GS", "SHOT-304GS"]:
-                ser = serial.Serial(port, baudrate=bRate, timeout=0, parity=serial.PARITY_NONE, bytesize=serial.EIGHTBITS)
+                ser = serial.Serial(port, baudrate=bRate, parity=serial.PARITY_NONE, bytesize=serial.EIGHTBITS)
+            elif self.__controller_model == "SHOT-702 / SHOT-302GS":
+                if bRate == 38400:
+                    ser = serial.Serial(port, baudrate=38400, parity=serial.PARITY_NONE,rtscts=True, bytesize=serial.EIGHTBITS)
+                else:
+                    ser = serial.Serial(port, baudrate=9600, parity=serial.PARITY_NONE, bytesize=serial.EIGHTBITS)             
             else:
-                ser = serial.Serial(port, baudrate=bRate, timeout=0, parity=serial.PARITY_NONE, bytesize=serial.EIGHTBITS)
+                ser = serial.Serial(port, baudrate=bRate, parity=serial.PARITY_NONE, bytesize=serial.EIGHTBITS)
 
             # Set the 'comports' attribute to the opened serial port
             self.comports = ser
-
             return True  # Successful COM port opening
 
         except Exception as ex:

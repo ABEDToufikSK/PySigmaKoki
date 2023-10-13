@@ -3,7 +3,7 @@ import time
 # add the parent directory of the current file to the Python module
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Import the required module    JP:  
+# Import the required module    JP:  必要なモジュール・インポート
 from SIGMAKOKI.SK_SHOT import StageControlShot
 
 # Function to get the stage position by axis in mm          JP: 各軸の位置（mm単位）を取得する関数
@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     # Create an instance of StageControlShot with the specified parameters 
     # JP:指定されたパラメータでStageControlShotのインスタンスを作成
-    con = StageControlShot(port, "SHOT-304GS", StageControlShot.BaudRateclass.BR_9600)
+    con = StageControlShot(port, "SHOT-304GS", StageControlShot.BaudRateClass.BR_9600)
     
     if con.IsComConnected():
         print("Serial Comport is Connected")
