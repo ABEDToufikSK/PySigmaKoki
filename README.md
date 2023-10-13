@@ -48,6 +48,17 @@ To begin exploring the library's capabilities, refer to our documentation and sa
 
 - **Sample code SHOT-302GS_SHOT-702**:[How to use this library to control SHOT-302GS](#shot-302gs_shot-702-controllers-usage)
 
+### **Note**
+
+Before using the SK library, there are several essential considerations.
+
+- Configure the right parameters for your stages to ensure precise program management.
+- Each stage comes with specific motor attributes, including step angle and pulses per rotation.
+- Consider the mechanical properties, such as lead screw and pitch, for accurate control.
+- Some stages, like OSMS-ZF, involve gearing details that you should be aware of.
+- Take into account division specifications, including resolution (Full/Half), to fine-tune your control settings.
+- A deep understanding of these stage details will enable you to write more effective code and achieve precise control over Sigma Koki Controllers and Stages.
+
 <div style="page-break-before: always;"
 ></div>
 
@@ -92,7 +103,7 @@ if __name__ == "__main__":
     Controlleur.SetSpeedAllMillimeter(value, acc)
 ```
 
-<span style="color: red;">**You can find further continuation within the program by exploring**</span> [Shot-304GS](tests/test_SHOT-304GS.py)
+>**You can find further continuation within the program by exploring** [Shot-304GS](tests/test_SHOT-304GS.py)
 
 <div style="page-break-before: always;"
 ></div>
@@ -138,7 +149,10 @@ if __name__ == "__main__":
     Controller.SetSpeedAllMillimeter(value, acc)
 ```
 
-<span style="color: red;">**You can find further continuation within the program by exploring**</span> [Shot-302GS](tests/test_SHOT-302GS_SHOT-702.py)
+>**You can find further continuation within the program by exploring** [Shot-302GS](tests/test_SHOT-302GS_SHOT-702.py)
+
+<div style="page-break-before: always;"
+></div>
 
 ## SIGMAKOKI | Precision in Motion
 
