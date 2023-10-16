@@ -7,6 +7,8 @@ setup(
     url='https://github.com/ABEDToufikSK/SK_PySigmaKoki.git',
     author='ABED TOUFIK',
     author_email='t.abed@sigma-koki.com''abedtoufik.g@gmail.com',
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     license='MIT',
     install_requires=['pyserial','enum','time'],
     packages=find_packages(),
