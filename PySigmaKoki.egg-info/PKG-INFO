@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: PySigmaKoki
+Version: 0.0.1
+Summary: Control Sigma Koki Controllers/Motorized Stages including SHOT/Hit/FC mode
+Home-page: https://github.com/ABEDToufikSK/SK_PySigmaKoki.git
+Author: ABED TOUFIK
+Author-email: t.abed@sigma-koki.comabedtoufik.g@gmail.com
+License: MIT
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Software Development
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.2
+License-File: LICENCE
+Requires-Dist: pyserial
+Requires-Dist: enum
+Requires-Dist: time
