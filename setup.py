@@ -10,6 +10,8 @@ setup(
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     license='MIT',
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     install_requires=['pyserial','enum','time'],
     packages=find_packages(),
     python_requires='>=3.2',  #  Python versions supported
