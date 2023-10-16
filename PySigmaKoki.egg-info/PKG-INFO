@@ -2,9 +2,9 @@ Metadata-Version: 2.1
 Name: PySigmaKoki
 Version: 0.0.1
 Summary: Control Sigma Koki Controllers/Motorized Stages including SHOT/Hit/FC mode
-Home-page: https://github.com/ABEDToufikSK/PySigmaKoki.git
+Home-page: https://github.com/ABEDToufikSK/SK_PySigmaKoki.git
 Author: ABED TOUFIK
-Author-email: t-abed@sigma-koki.com
+Author-email: t.abed@sigma-koki.com
 License: MIT
 Classifier: Development Status :: 5 - Production/Stable
 Classifier: Intended Audience :: Developers
