@@ -36,4 +36,4 @@ jobs:
       uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
       with:
         user: __ABEDToufik88__
-        password: pypi-AgEIcHlwaS5vcmcCJGViN2M3OTNjLWJlNzQtNGJlZi05N2UyLWQzOTZhZGY4Nzg0NgACKlszLCI3OGI1YzZhNC03NDBhLTRmODctODZlZS02ODJjNjQ0ODUwYTYiXQAABiDXtOVbMeNzkEIR_SdbLkDnpAmyyUQju5KP_yDe5J-MbQ
+        password: pypi-AgEIcHlwaS5vcmcCJGIzM2VhMmY2LWEyNjEtNDFjNy1hMzhkLWI5Yzc0MzZkYWE3MQACKlszLCI3OGI1YzZhNC03NDBhLTRmODctODZlZS02ODJjNjQ0ODUwYTYiXQAABiCj-zgJWZ175jQ2ehTR8JRD7Y64cczNj9f7YNLzKvc4qA
