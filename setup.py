@@ -8,7 +8,7 @@ setup(
     author='ABED TOUFIK',
     author_email='t.abed@sigma-koki.com''abedtoufik.g@gmail.com',
     license='MIT',
-    install_requires=['pyserial','enum'],
+    install_requires=['pyserial','enum','time'],
     packages=find_packages(),
     python_requires='>=3.2',  #  Python versions supported
     classifiers=[
