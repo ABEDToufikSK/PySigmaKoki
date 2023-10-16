@@ -8,9 +8,7 @@ setup(
     author='ABED TOUFIK',
     author_email='abedtoufik.g@gmail.com',
     license='MIT',
-    long_description=open('README.md').read(),
-    long_description_content_type='text/markdown',
-    install_requires=['pyserial','enum','time'],
+    install_requires=['pyserial','enum'],
     packages=find_packages(),
     python_requires='>=3.2',  #  Python versions supported
     classifiers=[
