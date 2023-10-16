@@ -4,7 +4,7 @@ setup(
     name='PySigmaKoki',
     version='0.0.1',
     description='Control Sigma Koki Controllers/Motorized Stages including SHOT/Hit/FC mode',
-    url='https://github.com/ABEDToufikSK/SK_PySigmaKoki.git',
+    url='https://github.com/ABEDToufikSK/PySigmaKoki.git',
     author='ABED TOUFIK',
     author_email='t.abed@sigma-koki.com',
     license='MIT',
