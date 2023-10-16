@@ -6,7 +6,7 @@ setup(
     description='Control Sigma Koki Controllers/Motorized Stages including SHOT/Hit/FC mode',
     url='https://github.com/ABEDToufikSK/PySigmaKoki.git',
     author='ABED TOUFIK',
-    author_email='t-abed@sigma-koki.com',
+    author_email='t.abed@sigma-koki.com',
     license='MIT',
     install_requires=['pyserial','enum'],
     packages=find_packages(),
