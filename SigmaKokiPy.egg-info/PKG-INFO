@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: SigmaKokiPy
+Version: 0.0.1
+Summary: Control Sigma Koki Controllers/Motorized Stages including SHOT/Hit/FC mode
+Home-page: https://github.com/ABEDToufikSK/SigmaKokiPy.git
+Author: ABED Toufik
+Author-email: abedtoufik.g@gmail.com
+License: MIT
+Requires-Python: >=3.2
+License-File: LICENCE
+Requires-Dist: pyserial
+Requires-Dist: enum
+Requires-Dist: time
