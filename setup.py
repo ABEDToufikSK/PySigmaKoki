@@ -9,7 +9,6 @@ setup(
     author_email='abedtoufik.g@gmail.com',
     license='MIT',
     install_requires=['pyserial','enum','time'],
-    packages=find_packages(),
     python_requires='>=3.2',  #  Python versions supported
     packages=find_packages()
 )
