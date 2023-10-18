@@ -36,10 +36,10 @@ pip install sigmakoki-controller
 | [SHOT-302/304GS](https://jp.optosigma.com/en_jp/shot-302gs.html) | [SHOT-702H](https://jp.optosigma.com/en_jp/shot-702h.html) | [SHRC-203](https://jp.optosigma.com/en_jp/shrc-203.html) |[GIP-101](https://jp.optosigma.com/en_jp/gip-101b.html)|
 | :-: | :-: | :-: | :-: |
 | Controller | Controller | Controller | Controller |
-| ![img1](Materials/SHOT-302.jpg) | ![img2](Materials/shot-702h.jpg) | ![img3](Materials/shrc-203.jpg) | ![img4](Materials/gip-101.jpg) |
+| ![img1](https://github.com/ABEDToufikSK/SigmaKokiPY/blob/master/Materials/SHOT-302.jpg?raw=true) | ![img2](https://github.com/ABEDToufikSK/SigmaKokiPY/blob/master/Materials/shot-702h.jpg?raw=true) | ![img3](https://github.com/ABEDToufikSK/SigmaKokiPY/blob/master/Materials/shrc-203.jpg?raw=true) | ![img4](https://github.com/ABEDToufikSK/SigmaKokiPY/blob/master/Materials/gip-101.jpg?raw=true) |
 | [[USER-M]](https://jp.optosigma.com/html/en_jp/software/motorize/manual_en/SHOT-302GS_304GS.pdf) | [[USER-M]](https://jp.optosigma.com/html/en_jp/software/motorize/manual_en/SHOT-702_EN.pdf) |[[USER-M]](https://jp.optosigma.com/html/en/page_pdf/SHRC-203.pdf) |[USER-M](https://jp.optosigma.com/html/en_jp/software/motorize/manual_en/GIP-101_en.pdf) |
 | Linear Stages | Rotation Stages | Goniometer Stages | With Scale |
-| ![img1](Materials/OSMSseries.jpg) | ![img2](Materials/OSMS-YAWseries.jpg) | ![img3](Materials/OSMS-gonio.jpg) | ![img4](Materials/OSMS(CS)20-(X).jpg) |
+| ![img1](https://github.com/ABEDToufikSK/SigmaKokiPY/blob/master/Materials/OSMSseries.jpg?raw=true) | ![img2](https://github.com/ABEDToufikSK/SigmaKokiPY/blob/master/Materials/OSMS-YAWseries.jpg?raw=true) | ![img3](https://github.com/ABEDToufikSK/SigmaKokiPY/blob/master/Materials/OSMS-gonio.jpg?raw=true) | ![img4](https://github.com/ABEDToufikSK/SigmaKokiPY/blob/master/Materials/OSMS(CS)20-(X).jpg?raw=true) |
 | [[GUIDE]](https://jp.optosigma.com/en_jp/motorized-stages/stepping-motor-stages/linear-motorized-stages.html) | [[GUIDE]](https://jp.optosigma.com/en_jp/motorized-stages/stepping-motor-stages/rotation-motorized-stages.html) |[[GUIDE]](https://jp.optosigma.com/en_jp/motorized-stages/stepping-motor-stages/goniometer-motorized-stages.html) |[Guide](https://jp.optosigma.com/en_jp/motorized-stages/stepping-motor-stages/with-scale.html) |
 
 To begin exploring the library's capabilities, refer to our documentation and sample code examples.
