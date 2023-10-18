@@ -1,10 +1,10 @@
 # add the parent directory of the current file to the Python module
 import os, sys
 import time
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # use this in case if module not installed 
 
 # Import the required module    JP:  必要なモジュール・インポート
-from SIGMAKOKI.SK_SHOT import StageControlShot
+from SigmaKokiPy.SK_SHOT import StageControlShot
 
 # Function to get the stage position by axis in mm          JP: 各軸の位置（mm単位）を取得する関数
 def getPosition(axis, timeout=10): # timeout 10second

@@ -70,13 +70,13 @@ Here's a basic example of how to use this library to control a SIGMAKOKI stage:
 - **Stage**: XYStage HPS60-20X  
 
 ```python
+# add the parent directory of the current file to the Python module
 import os, sys
 import time
-# add the parent directory of the current file to the Python module
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # use this in case if module not installed 
 
-# Import the required module    JP:  必要なモジュール・インポート  
-from SIGMAKOKI.SK_SHOT import StageControlShot
+# Import the required module    JP:  必要なモジュール・インポート
+from SigmaKokiPy.SK_SHOT import StageControlShot
 
 if __name__ == "__main__":
     port = 'com8'  # Define the COM port, adjust as needed
@@ -116,13 +116,13 @@ Here's a basic example of how to use this library to control a SIGMAKOKI stage:
 - **Stage**: XYStage HPS60-20X  
 
 ```python
+# add the parent directory of the current file to the Python module
 import os, sys
 import time
-# add the parent directory of the current file to the Python module
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # use this in case if module not installed 
 
 # Import the required module    JP:  必要なモジュール・インポート
-from SIGMAKOKI.SK_SHOT import StageControlShot
+from SigmaKokiPy.SK_SHOT import StageControlShot
 
 if __name__ == "__main__":
     port = 'com8'  # Define the COM port, adjust as needed
