@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='SigmaKokiPy',
-    version='0.0.2',
+    version='0.0.3',
     description='Control Sigma Koki Controllers/Motorized Stages including SHOT/Hit/FC mode',
     url='https://github.com/ABEDToufikSK/SigmaKokiPy.git',
     author='ABED Toufik',
