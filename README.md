@@ -25,7 +25,7 @@ Welcome to the SIGMAKOKI Controller Python Library, designed to empower develope
 To install the SIGMAKOKI Controller Python Library, you can use pip:
 
 ```bash
-pip install sigmakoki-controller
+pip install SigmaKokiPy
 ```
 
 <div style="page-break-before: always;"
